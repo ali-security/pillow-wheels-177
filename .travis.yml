@@ -231,8 +231,11 @@ before_install:
 install:
     # Maybe get and clean and patch source
     - if [[ -n "$LATEST" ]]; then BUILD_COMMIT=master; fi
+    - echo "cleaning"
     - clean_code $REPO_DIR $BUILD_COMMIT
+    - echo "builidng"
     - build_wheel $REPO_DIR $PLAT
+    - echo "done building"
     - ls -l "${TRAVIS_BUILD_DIR}/${WHEEL_SDIR}/"
 
 script:
