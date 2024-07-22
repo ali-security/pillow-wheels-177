@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install and test steps on Linux
 set -e
-
+echo "starting docker wrap test"
 # "python" and "pip" are already on the path as part of the docker
 # startup code in choose_python.sh, but the following are required and not
 # necessarily already set
