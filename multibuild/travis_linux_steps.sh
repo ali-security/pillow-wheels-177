@@ -127,7 +127,9 @@ function install_run {
         local plat_subst=$([ "$plat" == aarch64 ] && echo arm64v8 || echo $plat)
         local docker_image="${DOCKER_TEST_IMAGE/\{PLAT\}/$plat_subst}"
     fi
+    echo "pulling $docker_image"
     docker pull $docker_image
+    echo "running $docker_image"
     docker run --rm \
         -e PYTHON_VERSION="$MB_PYTHON_VERSION" \
         -e MB_PYTHON_VERSION="$MB_PYTHON_VERSION" \
