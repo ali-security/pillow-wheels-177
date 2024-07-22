@@ -15,7 +15,7 @@ MULTIBUILD_DIR=$(dirname "${BASH_SOURCE[0]}")
 source $MULTIBUILD_DIR/common_utils.sh
 
 # Change into root directory of repo
-# cd /io
+cd /io
 
 # Configuration for this package in `config.sh`.
 # This can overwrite `install_run` and `install_wheel` (called from
