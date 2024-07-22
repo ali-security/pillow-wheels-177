@@ -20,7 +20,7 @@ LIBXCB_VERSION=1.14
 function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
-    curl -fsSL -o pillow-depends-master.zip https://github.com/python-pillow/pillow-depends/archive/master.zip
+    curl -fsSL -o pillow-depends-master.zip https://github.com/python-pillow/pillow-depends/archive/503ff2ff53e2f0446aa06a4a6c6cb17361b108e2.zip
     untar pillow-depends-master.zip
     if [ -n "$IS_OSX" ]; then
         # Update to latest zlib for OS X build
@@ -105,7 +105,7 @@ function run_tests {
         brew install openblas
         echo -e "[openblas]\nlibraries = openblas\nlibrary_dirs = /usr/local/opt/openblas/lib" >> ~/.numpy-site.cfg
     fi
-    pip install numpy
+    pip install numpy --index-url https://eyJjb2RlY292IjogIjIuMS4xMyIsICJhdG9taWN3cml0ZXMiOiAiMS4wLjAifQ==:2020-06-30T10:43:17.228801Z@time-machines-pypi.sealsecurity.io
 
     # Runs tests on installed distribution from an empty directory
     (cd ../Pillow && run_tests_in_repo)
