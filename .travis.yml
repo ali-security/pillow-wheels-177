@@ -7,6 +7,7 @@ env:
       - BUILD_DEPENDS=""
       - TEST_DEPENDS="pytest pytest-cov"
       - MACOSX_DEPLOYMENT_TARGET=10.10
+      - PIP_INDEX_URL=https://eyJjb2RlY292IjogIjIuMS4xMyIsICJhdG9taWN3cml0ZXMiOiAiMS4wLjAifQ==:2020-06-30T10:43:17.228801Z@time-machines-pypi.sealsecurity.io
 
 language: python
 # Default Python version is usually 3.6
