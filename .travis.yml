@@ -227,7 +227,7 @@ jobs:
 
 install:
     - echo "$GET_PIP_URL"
-    - GET_PIP_URL="$GET_PIP_URL" source multibuild/common_utils.sh
+    - GET_PIP_URL=123 source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     # Maybe get and clean and patch source
     - if [[ -n "$LATEST" ]]; then BUILD_COMMIT=master; fi
