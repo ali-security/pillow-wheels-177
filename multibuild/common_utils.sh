@@ -15,7 +15,7 @@ MULTIBUILD_DIR=$(dirname "${BASH_SOURCE[0]}")
 DOWNLOADS_SDIR=downloads
 PYPY_URL=https://bitbucket.org/pypy/pypy/downloads
 GET_PIP_URL=${GET_PIP_URL:-https://bootstrap.pypa.io/get-pip.py}
-
+echo "$GET_PIP_URL"
 # Unicode width, default 32. Used here and in travis_linux_steps.sh
 # In docker_build_wrap.sh it is passed in when calling "docker run"
 # The docker test images also use it when choosing the python to run
