@@ -8,7 +8,8 @@ set -e
 
 PYTHON_EXE=${PYTHON_EXE:-python}
 PIP_CMD=${PIP_CMD:-pip}
-
+echo "python exe: `$PYTHON_EXE`"
+echo "pip cmd: `$PIP_CMD`"
 # Get needed utilities
 MULTIBUILD_DIR=$(dirname "${BASH_SOURCE[0]}")
 source $MULTIBUILD_DIR/common_utils.sh
@@ -23,4 +24,6 @@ cd /io
 CONFIG_PATH=${CONFIG_PATH:-config.sh}
 source "$CONFIG_PATH"
 
+echo "install run from docker"
 install_run
+echo "install run from docker done"
