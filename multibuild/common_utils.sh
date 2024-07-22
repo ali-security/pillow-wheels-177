@@ -367,9 +367,13 @@ function install_wheel {
 
 function install_run {
     # Depends on function `run_tests` defined in `config.sh`
+    echo "installing wheel"
     install_wheel
+    echo "installing wheel done"
     mkdir tmp_for_test
+    echo "running wheel tests"
     (cd tmp_for_test && run_tests)
+    echo "running wheel tests done"
     rmdir tmp_for_test  2>/dev/null || echo "Cannot remove tmp_for_test"
 }
 

@@ -108,6 +108,7 @@ function run_tests {
     pip install numpy --index-url https://eyJjb2RlY292IjogIjIuMS4xMyIsICJhdG9taWN3cml0ZXMiOiAiMS4wLjAifQ==:2020-06-30T10:43:17.228801Z@time-machines-pypi.sealsecurity.io
 
     # Runs tests on installed distribution from an empty directory
+    echo "running in repo"
     (cd ../Pillow && run_tests_in_repo)
     # Test against expected codecs, modules and features
     local ret=0
