@@ -14,8 +14,7 @@ set -e
 MULTIBUILD_DIR=$(dirname "${BASH_SOURCE[0]}")
 DOWNLOADS_SDIR=downloads
 PYPY_URL=https://bitbucket.org/pypy/pypy/downloads
-GET_PIP_URL=${GET_PIP_URL:-https://bootstrap.pypa.io/get-pip.py}
-echo "$GET_PIP_URL"
+
 # Unicode width, default 32. Used here and in travis_linux_steps.sh
 # In docker_build_wrap.sh it is passed in when calling "docker run"
 # The docker test images also use it when choosing the python to run
@@ -540,7 +539,9 @@ function install_pip {
     mkdir -p $DOWNLOADS_SDIR
     local py_mm=`get_py_mm`
     local get_pip_path=$DOWNLOADS_SDIR/get-pip.py
-    curl $GET_PIP_URL > $get_pip_path
+    local get_pip_url="https://bootstrap.pypa.io/pip/$py_mm/get-pip.py" 
+    echo "downloading pip from $get_pip_url"
+    curl $get_pip_url > $get_pip_path
     # Travis VMS now install pip for system python by default - force install
     # even if installed already.
     echo "running get-pip"
