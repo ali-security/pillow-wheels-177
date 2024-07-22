@@ -1,6 +1,3 @@
-[submodule "multibuild"]
-	path = multibuild
-	url = https://github.com/matthew-brett/multibuild.git
 [submodule "Pillow"]
 	path = Pillow
 	url = https://github.com/ali-security/pillow-177
