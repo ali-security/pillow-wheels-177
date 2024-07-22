@@ -222,8 +222,8 @@ jobs:
     #     - LATEST="true"
 
 
-before_install:
-    - before_install
+# before_install:
+#     - before_install
 
 install:
     - echo "$GET_PIP_URL"
