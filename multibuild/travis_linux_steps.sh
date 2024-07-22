@@ -130,7 +130,7 @@ function install_run {
     echo "pulling $docker_image"
     docker pull $docker_image
     echo "running $docker_image"
-    docker run --rm \
+    docker run --rm -t \
         -e PYTHON_VERSION="$MB_PYTHON_VERSION" \
         -e MB_PYTHON_VERSION="$MB_PYTHON_VERSION" \
         -e UNICODE_WIDTH="$UNICODE_WIDTH" \
