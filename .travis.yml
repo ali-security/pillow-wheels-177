@@ -222,7 +222,6 @@ jobs:
 
 
 before_install:
-    - echo "$GET_PIP_URL"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
@@ -238,7 +237,9 @@ install:
     - ls -l "${TRAVIS_BUILD_DIR}/${WHEEL_SDIR}/"
 
 script:
+    - echo "running install on $PLAT"
     - install_run $PLAT
+    - echo "running install on $PLAT done"
 
 # # Upload wheels to GitHub Releases
 # deploy:
