@@ -14,7 +14,7 @@ apt-get update
 for pyver in 3.4 3.5 3.6 2.7 2.6 3.3; do
     pybin=python$pyver
 
-    apt-get install -y ${pybin}-dev ${pybin}-tk
+    apt-get install -y ${pybin}-dev # ${pybin}-tk
     get_pip_fname="get-pip.py"
     get_pip_fname="get-pip-${pyver}.py"
     wget $PIP_ROOT_URL/pip/${pyver}/get-pip.py -O $get_pip_fname
