@@ -228,7 +228,7 @@ before_install:
 
 install:
     # Maybe get and clean and patch source
-    - if [[ -n "$LATEST" ]]; then BUILD_COMMIT=master; fi
+    - if [[ -n "$LATEST" ]]; then BUILD_COMMIT=main; fi
     - echo "cleaning"
     - clean_code $REPO_DIR $BUILD_COMMIT
     - echo "builidng"
