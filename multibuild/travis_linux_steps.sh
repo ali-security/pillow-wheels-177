@@ -124,16 +124,10 @@ function install_run {
         local docker_image="local-build-tester:$bitness"
 
         git clone https://github.com/matthew-brett/trusty
-        cd trusty
-        if [["$bitness" == "64" ]]; then
-            git checkout 6511c7752ffe6a6f58f9b22fc81a0228ca42595a
-        else
-            git checkout 6511c7752ffe6a6f58f9b22fc81a0228ca42595a
-        fi
-
+        cd docker32
         echo "building image tqag local-build-tester:$bitness"
         docker build . -t $docker_image
-
+        cd ..
     else
         # aarch64 is called arm64v8 in Ubuntu
         local plat_subst=$([ "$plat" == aarch64 ] && echo arm64v8 || echo $plat)
