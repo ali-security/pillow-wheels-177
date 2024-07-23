@@ -18,6 +18,7 @@ else
     py_bin=/usr/bin/python${py_ver}
 fi
 if [ ! -e ${py_bin} ]; then
+    echo "error 1"
     exit 1
 fi
 /root/.local/bin/virtualenv --python=$py_bin venv

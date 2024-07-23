@@ -123,8 +123,7 @@ function install_run {
         local bitness=$([ "$plat" == i686 ] && echo 32 || echo 64)
         local docker_image="local-build-tester:$bitness"
 
-        git clone https://github.com/matthew-brett/trusty
-        cd docker32
+        cd docker$bitness
         echo "building image tqag local-build-tester:$bitness"
         docker build . -t $docker_image
         cd ..

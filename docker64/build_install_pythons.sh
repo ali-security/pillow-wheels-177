@@ -2,17 +2,22 @@
 # Install Pythons 2.7 3.4 3.5 3.6 3.7 3.8rc1 and matching pips
 set -ex
 
-echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu trusty main" > /etc/apt/sources.list.d/deadsnakes.list
+echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu trusty main" >/etc/apt/sources.list.d/deadsnakes.list
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6A755776
 apt-get update
 apt-get install -y wget
 PIP_ROOT_URL="https://bootstrap.pypa.io"
-for pyver in 3.4 3.5 3.6 2.7 2.6 3.3 ; do
+apt-get install software-properties-common -y
+add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
+apt-get update
+
+for pyver in 3.4 3.5 3.6 2.7 2.6 3.3; do
     pybin=python$pyver
+
     apt-get install -y ${pybin}-dev ${pybin}-tk
     get_pip_fname="get-pip.py"
     get_pip_fname="get-pip-${pyver}.py"
-    wget $PIP_ROOT_URL/${pyver}/get-pip.py -O $get_pip_fname
+    wget $PIP_ROOT_URL/pip/${pyver}/get-pip.py -O $get_pip_fname
     ${pybin} ${get_pip_fname}
 done
 
@@ -30,7 +35,7 @@ function compile_python {
     local froot="Python-${py_ver}"
     local ftgz="${froot}.tgz"
     # Drop any suffix from three-digit version number
-    local py_nums=$(echo $py_ver |  awk -F "." '{printf "%d.%d.%d", $1, $2, $3}')
+    local py_nums=$(echo $py_ver | awk -F "." '{printf "%d.%d.%d", $1, $2, $3}')
     wget https://www.python.org/ftp/python/${py_nums}/${ftgz}
     tar zxf ${ftgz}
     local py_nodot=$(echo ${py_ver} | awk -F "." '{ print $1$2 }')
@@ -42,10 +47,10 @@ function compile_python {
     fi
     local out_root=/opt/cp${py_nodot}${abi_suff}
     mkdir $out_root
-    (cd Python-${py_ver} \
-        && ./configure --prefix=$out_root ${extra_args} \
-        && make \
-        && make install)
+    (cd Python-${py_ver} &&
+        ./configure --prefix=$out_root ${extra_args} &&
+        make &&
+        make install)
     # Remove stray files
     rm -rf ${froot} ${ftgz}
 }
@@ -66,9 +71,9 @@ function build_openssl {
     wget https://www.openssl.org/source/${ftgz}
     tar xvf ${ftgz}
     (cd $froot &&
-    ./config no-ssl2 no-shared -fPIC --prefix=/usr/local/ssl &&
-    make &&
-    make install)
+        ./config no-ssl2 no-shared -fPIC --prefix=/usr/local/ssl &&
+        make &&
+        make install)
     rm -rf ${froot} ${ftgz}
 }
 
