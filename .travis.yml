@@ -113,12 +113,12 @@ jobs:
     #     - MB_PYTHON_VERSION=3.6
     #     - LATEST="true"
 
-    # - name: "3.6 Xenial latest"
-    #   os: linux
-    #   if: tag IS blank
-    #   env:
-    #     - MB_PYTHON_VERSION=3.6
-    #     - LATEST="true"
+    - name: "3.6 Xenial latest"
+      os: linux
+      if: tag IS blank
+      env:
+        - MB_PYTHON_VERSION=3.6
+        - LATEST="true"
     # - name: "3.6 Xenial 32-bit latest"
     #   os: linux
     #   if: tag IS blank
@@ -236,10 +236,10 @@ install:
     - echo "done building"
     - ls -l "${TRAVIS_BUILD_DIR}/${WHEEL_SDIR}/"
 
-script:
-    - echo "running install on $PLAT"
-    - install_run $PLAT
-    - echo "running install on $PLAT done"
+# script:
+#     - echo "running install on $PLAT"
+#     - install_run $PLAT
+#     - echo "running install on $PLAT done"
 
 # # Upload wheels to GitHub Releases
 # deploy:

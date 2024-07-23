@@ -9,7 +9,9 @@ apt-get install -y wget
 PIP_ROOT_URL="https://bootstrap.pypa.io"
 apt-get install software-properties-common -y
 add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
-apt-get update
+add-apt-repository ppa:deadsnakes/ppa -y
+add-apt-repository -y ppa:jblgf0/python
+apt-get update -y
 
 for pyver in 3.4 3.5 3.6 2.7 2.6 3.3; do
     pybin=python$pyver
