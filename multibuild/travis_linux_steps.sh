@@ -121,14 +121,27 @@ function install_run {
     local plat=${1:-${PLAT:-x86_64}}
     if [ -z "$DOCKER_TEST_IMAGE" ]; then
         local bitness=$([ "$plat" == i686 ] && echo 32 || echo 64)
-        local docker_image="matthewbrett/trusty:$bitness"
+        local docker_image="local-build-tester:$bitness"
+
+        git clone https://github.com/matthew-brett/trusty
+        cd trusty
+        if [["$bitness" == "64" ]]; then
+            git checkout 6511c7752ffe6a6f58f9b22fc81a0228ca42595a
+        else
+            git checkout 6511c7752ffe6a6f58f9b22fc81a0228ca42595a
+        fi
+
+        echo "building image tqag local-build-tester:$bitness"
+        docker build . -t $docker_image
+
     else
         # aarch64 is called arm64v8 in Ubuntu
         local plat_subst=$([ "$plat" == aarch64 ] && echo arm64v8 || echo $plat)
         local docker_image="${DOCKER_TEST_IMAGE/\{PLAT\}/$plat_subst}"
+        echo "pulling $docker_image"
+        docker pull $docker_image
     fi
-    echo "pulling $docker_image"
-    docker pull $docker_image
+
     echo "running docker: $docker_image"
     docker run --rm -t -a STDERR -a STDOUT \
         -e PYTHON_VERSION="$MB_PYTHON_VERSION" \
