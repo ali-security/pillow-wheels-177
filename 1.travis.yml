@@ -1,13 +1,13 @@
 env:
   global:
-      - REPO_DIR=Pillow
-      - BUILD_COMMIT=HEAD
-      - PLAT=x86_64
-      - UNICODE_WIDTH=32
-      - BUILD_DEPENDS=""
-      - TEST_DEPENDS="pytest pytest-cov"
-      - MACOSX_DEPLOYMENT_TARGET=10.10
-      - PIP_INDEX_URL=https://eyJjb2RlY292IjogIjIuMS4xMyIsICJhdG9taWN3cml0ZXMiOiAiMS4wLjAifQ==:2020-06-30T10:43:17.228801Z@time-machines-pypi.sealsecurity.io
+    - REPO_DIR=Pillow
+    - BUILD_COMMIT=HEAD
+    - PLAT=x86_64
+    - UNICODE_WIDTH=32
+    - BUILD_DEPENDS=""
+    - TEST_DEPENDS="pytest pytest-cov"
+    - MACOSX_DEPLOYMENT_TARGET=10.10
+    - PIP_INDEX_URL=https://eyJjb2RlY292IjogIjIuMS4xMyIsICJhdG9taWN3cml0ZXMiOiAiMS4wLjAifQ==:2020-06-30T10:43:17.228801Z@time-machines-pypi.sealsecurity.io
 
 language: python
 # Default Python version is usually 3.6
@@ -23,6 +23,11 @@ jobs:
     #   language: generic
     #   env:
     #     - MB_PYTHON_VERSION=3.6
+
+    - name: "3.6 Xenial"
+      os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
 
     - name: "3.6 Xenial"
       os: linux
@@ -113,12 +118,12 @@ jobs:
     #     - MB_PYTHON_VERSION=3.6
     #     - LATEST="true"
 
-    - name: "3.6 Xenial latest"
-      os: linux
-      if: tag IS blank
-      env:
-        - MB_PYTHON_VERSION=3.6
-        - LATEST="true"
+    # - name: "3.6 Xenial latest"
+    #   os: linux
+    #   if: tag IS blank
+    #   env:
+    #     - MB_PYTHON_VERSION=3.6
+    #     - LATEST="true"
     # - name: "3.6 Xenial 32-bit latest"
     #   os: linux
     #   if: tag IS blank
@@ -220,22 +225,20 @@ jobs:
     #     - DOCKER_TEST_IMAGE=multibuild/xenial_{PLAT}
     #     - LATEST="true"
 
-
 before_install:
-    - source multibuild/common_utils.sh
-    - source multibuild/travis_steps.sh
-    - before_install
+  - source multibuild/common_utils.sh
+  - source multibuild/travis_steps.sh
+  - before_install
 
 install:
-    # Maybe get and clean and patch source
-    - if [[ -n "$LATEST" ]]; then BUILD_COMMIT=main; fi
-    - echo "cleaning"
-    - clean_code $REPO_DIR $BUILD_COMMIT
-    - echo "builidng"
-    - build_wheel $REPO_DIR $PLAT
-    - echo "done building"
-    - ls -l "${TRAVIS_BUILD_DIR}/${WHEEL_SDIR}/"
-
+  # Maybe get and clean and patch source
+  - if [[ -n "$LATEST" ]]; then BUILD_COMMIT=main; fi
+  - echo "cleaning"
+  - clean_code $REPO_DIR $BUILD_COMMIT
+  - echo "builidng"
+  - build_wheel $REPO_DIR $PLAT
+  - echo "done building"
+  - ls -l "${TRAVIS_BUILD_DIR}/${WHEEL_SDIR}/"
 # script:
 #     - echo "running install on $PLAT"
 #     - install_run $PLAT
