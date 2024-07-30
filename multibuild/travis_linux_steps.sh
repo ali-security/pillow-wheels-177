@@ -85,24 +85,7 @@ function build_multilinux {
     local docker_image=${DOCKER_IMAGE:-quay.io/pypa/manylinux${MB_ML_VER}_\$plat}
     docker_image=$(eval echo "$docker_image")
     retry docker pull $docker_image
-    docker run --rm \
-        -e BUILD_COMMANDS="$build_cmds" \
-        -e PYTHON_VERSION="$MB_PYTHON_VERSION" \
-        -e MB_PYTHON_VERSION="$MB_PYTHON_VERSION" \
-        -e UNICODE_WIDTH="$UNICODE_WIDTH" \
-        -e BUILD_COMMIT="$BUILD_COMMIT" \
-        -e CONFIG_PATH="$CONFIG_PATH" \
-        -e ENV_VARS_PATH="$ENV_VARS_PATH" \
-        -e WHEEL_SDIR="$WHEEL_SDIR" \
-        -e MANYLINUX_URL="$MANYLINUX_URL" \
-        -e BUILD_DEPENDS="$BUILD_DEPENDS" \
-        -e USE_CCACHE="$USE_CCACHE" \
-        -e REPO_DIR="$repo_dir" \
-        -e PLAT="$PLAT" \
-        -e MB_ML_VER="$MB_ML_VER" \
-        -v $PWD:/io \
-        -v $HOME:/parent-home \
-        $docker_image /io/$MULTIBUILD_DIR/docker_build_wrap.sh
+    echo "docker run --rm         -e BUILD_COMMANDS="$build_cmds"         -e PYTHON_VERSION="$MB_PYTHON_VERSION"         -e MB_PYTHON_VERSION="$MB_PYTHON_VERSION"         -e UNICODE_WIDTH="$UNICODE_WIDTH"         -e BUILD_COMMIT="$BUILD_COMMIT"         -e CONFIG_PATH="$CONFIG_PATH"         -e ENV_VARS_PATH="$ENV_VARS_PATH"         -e WHEEL_SDIR="$WHEEL_SDIR"         -e MANYLINUX_URL="$MANYLINUX_URL"         -e BUILD_DEPENDS="$BUILD_DEPENDS"         -e USE_CCACHE="$USE_CCACHE"         -e REPO_DIR="$repo_dir"         -e PLAT="$PLAT"         -e MB_ML_VER="$MB_ML_VER"         -v $PWD:/io         -v $HOME:/parent-home         $docker_image /io/$MULTIBUILD_DIR/docker_build_wrap.sh"
 }
 
 function install_run {
